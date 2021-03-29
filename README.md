@@ -1,1 +1,1 @@
-# Codecademy-project
+# gen-c01-exercises
