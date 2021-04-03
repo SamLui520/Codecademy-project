@@ -4,7 +4,7 @@ img{
   .description{
     font-size: 20px;
   }
-  .cook-time{
+  #cook-time{
     font-weight: bold;
   }
   li .ingredients{
