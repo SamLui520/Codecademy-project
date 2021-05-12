@@ -1,5 +1,4 @@
 const prompt = require('prompt-sync')({ sigint: true });
-const readkey = require('readkey');
 
 const hat = '^';
 const hole = 'O';
@@ -26,7 +25,10 @@ class Field {
     }
 
     ask() {
-        let move = prompt('Which direction do you want to move to? ');
+        console.log('Which direction do you want to move to?')
+        console.log('(8 for Up, 2 for down, 4 for left and 6 for right)');
+        console.log('(7 for leftUp, 9 for rightUp, 1 for leftDown and 3 for rightDown)');
+        let move = prompt();
         switch (move.toLowerCase()) {
             case '8':
                 console.log('Moving up');
@@ -45,22 +47,22 @@ class Field {
                 this.x += 1;
                 break;
             case '7':
-                console.log('Moving up');
+                console.log('Moving leftUp');
                 this.x -= 1;
                 this.y -= 1;
                 break;
             case '9':
-                console.log('Moving down');
+                console.log('Moving rightUp');
                 this.x += 1;
                 this.y -= 1;
                 break;
             case '1':
-                console.log('Moving left');
+                console.log('Moving leftDown');
                 this.x -= 1;
                 this.y += 1;
                 break;
             case '3':
-                console.log('Moving right');
+                console.log('Moving rightDown');
                 this.x += 1;
                 this.y += 1;
                 break;
