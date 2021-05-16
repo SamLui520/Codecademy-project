@@ -100,11 +100,16 @@ export class Controller {
             res.status(200).json(
                 await this.service.updateTodoList(
                     req.params.id,
-                    req.body.name,
-                    req.body.description,
-                    req.body.assignedto,
-                    req.body.duedate,
-                    req.body.status
+                    req.body.item,
+                    req.body.content,
+                    req.body.dueDate,
+                    req.body.startDate,
+                    req.body.startTime,
+                    req.body.endDate,
+                    req.body.endTime,
+                    req.body.category,
+                    req.body.assignedTo,
+                    req.body.statu
                 )
             )
         } catch (e) {

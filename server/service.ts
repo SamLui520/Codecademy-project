@@ -56,23 +56,27 @@ export class Service {
     }
 
     // [done]
-    async updateTodoList(id: string, name?: string, description?: string, assignedto?: string, duedate?: string, status?: string) {
+    async updateTodoList(id: string, item?: string, content?: string, dueDate?: string, startDate?: string, startTime?: string, endDate?: string, endTime?: string, category?: string, assignedto?: string, status?: string) {
 
         const filePath = __dirname + '/TodoList.csv'
         const data = await fs.promises.readFile(filePath, 'utf-8')
         const lines = data.split('\n')
         let result: string = "";
-        // console.log("service " + id + name + description + assignedto + duedate + status )
         for (let i = 0; i < lines.length; i++) {
             if (lines[i] == undefined || lines[i].trim() == "") continue;
             let words = lines[i].split(',');
             console.log(`words[0]: ${words[0]}, id: ${id}, ${words[0] == id}`)
             if (words[0] == id) {
-                words[1] = "" + name;
-                words[2] = "" + description;
-                words[3] = "" + assignedto;
-                words[4] = "" + duedate;
-                words[5] = "" + status;
+                words[1] = "" + item;
+                words[2] = "" + content;
+                words[3] = "" + dueDate;
+                words[4] = "" + startDate;
+                words[5] = "" + startTime;
+                words[6] = "" + endDate;
+                words[7] = "" + endTime;
+                words[8] = "" + category;
+                words[9] = "" + assignedto;
+                words[10] = "" + status;
                 result = result + words.join(',') + "\n"
             } else {
                 result = result + lines[i] + "\n"
