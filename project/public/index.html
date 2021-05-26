@@ -53,15 +53,27 @@
                                     Classification
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    <li><a class="dropdown-item" href="#">School</a></li>
+                                    <li><a class="dropdown-item" href="#" id="searchStudy1" data-id="study">Study</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Work</a></li>
+                                    <li><a class="dropdown-item" href="#" id="searchWork1" data-id="work">Work</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Office</a></li>
+                                    <li><a class="dropdown-item" href="#" id="searchFamily1" data-id="family">Family</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#" id="searchComplete1" data-id="complete">Complete</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#" id="searchUndo1" data-id="undo">Undo</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#" id="searchAllItem1" data-id="allItem">All item</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -95,10 +107,7 @@
         <div class="container-fluid">
             <div class="dropdown">
                 <div class="row">
-                    <div class="col-3" style="padding: 10px;">
-                        <button class="btn bg-info" type="submit" style="width: 100%; height:60px;">Item Done</button>
-                    </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; height:60px; float: right;">
                                 order to
                                 </button>
@@ -108,7 +117,7 @@
                             <li><a class="dropdown-item" href="#">Status</a></li>
                         </ul>
                     </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; height:60px; float: right;">
                                 <i class="fas fa-grip-horizontal"></i>
                                 </button>
@@ -118,7 +127,7 @@
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</a></li>
                         </ul>
                     </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" onclick="topFunction()" id="myBtn" title="Go to top" style="width: 100%; height:60px; float: right;">Back To Top</button>
                     </div>
                 </div>
@@ -145,33 +154,54 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-10" style="padding: 40px; flex:1; ">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width: 300%;" id="searchBar2">
+                    <div class="col-4" style="padding: 40px; flex:1; ">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Classification
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#" id="searchStudy2" data-id="study">Study</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" id="searchWork2" data-id="work">Work</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" id="searchFamily2" data-id="family">Family</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" id="searchComplete2" data-id="complete">Complete</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" id="searchUndo2" data-id="undo">Undo</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" id="searchAllItem2" data-id="allItem">All item</a></li>
+                            </ul>
+                          </div>
+                    </div>
+                    <div class="col-6" style="padding: 40px; flex:1; ">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width: 200%;" id="searchBar2">
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="container-fluid" style=" background-color: #db6414; width: 100%px; height: 130px;">
-            <div class="row">
-                <div class="col-4" style="padding: 15px;">
-                    <button class="btn bg-secondary" type="submit" style="width: 90%; height: 100px;"><h1>School</h1></button>
-                </div>
-                <div class="col-4" style="padding: 15px;">
-                    <button class="btn bg-secondary" type="submit" style="width: 90%; height: 100px;"><h1>Work</h1></button>
-                </div>
-                <div class="col-4" style="padding: 15px;">
-                    <button class="btn bg-secondary" type="submit" style="width: 90%; height: 100px;"><h1>Office</h1></button>
-                </div>
-            </div>
     </header>
 
     <body>
-        <div class="container-fluid" style="width: 100%; height: 260px;">
+        <div class="container-fluid" style="width: 100%; height: 130px;">
 
         </div>
-        <div class="container-fluid" style="width: 100%; background-color: blueviolet;">
+        <div class="container-fluid" style="width: 100%;">
             <div id='fetch-area2'>
 
+            </div>
+            <div class="card-add" style="border-color:azure;">
+                <a data-bs-toggle="modal" data-bs-target="#AddItemModal"><i class="fas fa-plus-circle"></i></a>
             </div>
         </div>
         <div class="container-fluid" style="width: 100%; height: 100px;">
@@ -184,10 +214,7 @@
         <div class="container-fluid">
             <div class="dropdown">
                 <div class="row">
-                    <div class="col-3" style="padding: 10px;">
-                        <button class="btn bg-info" type="submit" style="width: 100%; height:60px;">Item Done</button>
-                    </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; height:60px; float: right;">
                                     order to
                                     </button>
@@ -197,7 +224,7 @@
                             <li><a class="dropdown-item" href="#">Status</a></li>
                         </ul>
                     </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; height:60px; float: right;">
                                     <i class="fas fa-grip-horizontal"></i>
                                     </button>
@@ -207,7 +234,7 @@
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</a></li>
                         </ul>
                     </div>
-                    <div class="col-3 dropup" style="padding: 10px;">
+                    <div class="col-4 dropup" style="padding: 10px;">
                         <button class="btn bg-info" onclick="topFunction()" id="myBtn" title="Go to top" style="width: 100%; height:60px; float: right;">Back To Top</button>
                     </div>
                 </div>
@@ -217,7 +244,7 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-lg-down">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -354,7 +381,7 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="AddItemModal" tabindex="-1" aria-labelledby="AddItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-lg-down">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="AddItemModalLabel">Add Item</h5>
@@ -362,10 +389,8 @@
                 </div>
                 <form method="POST" id='fetchAddItem' action='http://localhost:8080/todolist'>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="form-label">ID:</label>
-                                <input type='text' name='fetchId' id='fetchId' />
+                        <div class="row g-3">
+                            <div class="col-12" id="itemId">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Item:</label>
@@ -377,12 +402,11 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Status:</label>
-                                <select id="fetchStatu" class="form-select">
+                                <select id="fetchStatus" class="form-select">
                                             <option selected>Choose...</option>
                                                 <option>todo</option>
                                                 <option>in-progress</option>
                                                 <option>review</option>
-                                                <option>done</option>
                                             </select>
                                 <p><br></p>
                             </div>
@@ -429,7 +453,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div><button type='submit' class="btn bg-primary">Save</button></div>
+                        <div><button type='click' class="btn bg-primary">Save</button></div>
                     </div>
             </div>
             </form>
@@ -438,7 +462,7 @@
 
         <!-- Modal -->
     <div class="modal fade" id="AddItemModal2" tabindex="-1" aria-labelledby="AddItemModal2Label" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen-lg-down">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="AddItemModal2Label">Edit Item</h5>
@@ -446,70 +470,15 @@
                     </div>
                     <form method="POST" id='updateItem' action='http://localhost:8080/todolist'>
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row g-3">
                                 <div class="col-12">
-                                    <label class="form-label">ID:</label>
-                                    <input type='text' name='fetchId2' id='fetchId2' />
+                                    <label class="input-group-text">ID:</label>
+                                    <select class="form-select" id="chooseId1">                                      
+                                    </select>
                                 </div>
-                                <div class="col-12">
-                                    <label class="form-label">Item:</label>
-                                    <input type='text' name='fetchItem2' id='fetchItem2' />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" placeholder="name">Assigned to:</label>
-                                    <input type='text' name='fetchAssignedTo2' id='fetchAssignedTo2' />
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">Status:</label>
-                                    <select id="fetchStatu2" class="form-select">
-                                                <option selected>Choose...</option>
-                                                    <option>todo</option>
-                                                    <option>in-progress</option>
-                                                    <option>review</option>
-                                                    <option>done</option>
-                                                </select>
-                                    <p><br></p>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" placeholder="name">Category:</label>
-                                    <select id="fetchCategory2" class="form-select">
-                                                    <option selected>Choose...</option>
-                                                    <option>study</option>
-                                                    <option>work</option>
-                                                    <option>family</option>
-                                                    <option>null</option>
-                                                </select>
-                                </div>
-                                <p><br></p>
-                                <div class="col-12">
-                                    <label>Due Date:</label>
-                                    <input type="date" id="fetchDueDate2" name="fetchDueDate2">
-                                </div>
-                                <p><br></p>
-                                <div class="col-12">
-                                    <label>Start Date:</label>
-                                    <input type="date" id="fetchStartDate2" name="fetchStartDate2">
-                                </div>
-                                <p><br></p>
-                                <div class="col-12">
-                                    <label>Start Time:</label>
-                                    <input type="time" id="fetchStartTime2" name="fetchStartTime2">
-                                </div>
-                                <p><br></p>
-                                <div class="co-12">
-                                    <label>End Date:</label>
-                                    <input type="date" id="fetchEndDate2" name="fetchEndDate2">
-                                </div>
-                                <p><br></p>
-                                <div class="col-12">
-                                    <label>End Time:</label>
-                                    <input type="time" id="fetchEndTime2" name="fetchEndTime2">
-                                </div>
-                                <p><br></p>
-                                <div class="col-12">
-                                    <label class="form-label">Description:</label><br>
-                                    <input type='text' name='fetchDescription2' id='fetchDescription2' style="width:100%;"/>
-                                </div>
+                                <div id="showEditItem1">
+
+                                </div>                               
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -522,7 +491,7 @@
 
                <!-- Modal -->
         <div class="modal fade" id="AddItemModal3" tabindex="-1" aria-labelledby="AddItemModal3Label" aria-hidden="true">
-                <div class="modal-dialog modal-fullscreen-lg-down">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="AddItemModal3Label">Delete Item</h5>
@@ -532,15 +501,17 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <label class="form-label">ID:</label>
-                                        <input type='text' name='fetchId2' id='fetchId3' />
+                                            <label class="input-group-text">ID:</label>
+                                            <select class="form-select" id="chooseId2">
+                                              
+                                            </select>                
+                                    </div>
                                 </div>
-                            </div>
                             <div class="modal-footer">
                                 <div><button type='submit' class="btn bg-danger">Delete</button></div>
                             </div>
-                    </div>
-                    </form>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
