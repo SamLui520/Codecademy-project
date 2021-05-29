@@ -1,14 +1,21 @@
+// button to backtop
 function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
 
+//save sever data
 let jsonResponse = [];
+let loginJsonResponse = [];
+let whoLoginJsonResponse = [];
+// show Item area (desktop and mobile)
 const desktop = document.querySelector('#fetch-area');
 const mobile = document.querySelector('#fetch-area2');
+// show Edit form area
+const edit = document.querySelector('#showEditItem1');
 
 //load dataBase and show data
-const loadTodoList = async () => {
+const loadData = async () => {
         const data = await fetch('http://localhost:8080/todolist')
         jsonResponse = await data.json()
         displayTodoList1(jsonResponse)
@@ -17,8 +24,23 @@ const loadTodoList = async () => {
         displayId2(jsonResponse) 
         displayId3(jsonResponse)
         disEdit1(jsonResponse)
+        const loginData = await fetch('http://localhost:8080/login')
+        loginJsonResponse = await loginData .json()
+        loginId1(loginJsonResponse)
+        const whologinData = await fetch('http://localhost:8080/whologin')
+        whoLoginJsonResponse = await whologinData .json()
+        for (let i of whoLoginJsonResponse) {
+            if(i.login == "no"){
+                disUserName1(whoLoginJsonResponse)
+                disUserName3(whoLoginJsonResponse)
+                }else{
+                disUserName2(whoLoginJsonResponse)
+                disUserName4(whoLoginJsonResponse)
+            }
+        }
 };
 
+//Classification
 searchStudy1.addEventListener('click', (e) => {
     const searchString = searchStudy1.dataset.id.toLowerCase();
 
@@ -138,6 +160,7 @@ searchComplete2.addEventListener('click', (e) => {
     });
     displayTodoList4(filter);
 });
+
 //searching
 searchBar1.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
@@ -162,7 +185,6 @@ searchBar1.addEventListener('keyup', (e) => {
     displayTodoList3(filter);
 });
 
-//searching
 searchBar2.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
 
@@ -184,12 +206,14 @@ searchBar2.addEventListener('keyup', (e) => {
     displayTodoList4(filter);
 });
 
+//onClick to choose ID in Edit form
 chooseId1.addEventListener('click', (e) => {
     disEdit1(jsonResponse);
 });
 
+//show Item data in Edit form
 async function disEdit1(jsonResponse) {
-    let displayArea = document.querySelector('#showEditItem1');
+    let displayArea = edit;
     let displayhtml = ""
     for (let i of jsonResponse) {
         if(i.id == chooseId1.value){
@@ -258,6 +282,7 @@ async function disEdit1(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
+// show Id in Edit form 
 async function displayId1(jsonResponse) {
     let displayArea = document.querySelector('#chooseId1');
     let displayhtml = ""
@@ -278,6 +303,7 @@ async function displayId2(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
+// show Id in AddItem form
 async function displayId3(jsonResponse) {
     let displayArea = document.querySelector('#itemId');
     let displayhtml = ""
@@ -293,7 +319,7 @@ async function displayId3(jsonResponse) {
 };
 
 
-//show any item in desktop
+//show item in desktop (no complete item)
 async function displayTodoList1(jsonResponse) {
     let displayArea = desktop
     let displayhtml = ""
@@ -362,7 +388,7 @@ async function displayTodoList1(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
-//show any item in mobile
+//show item in mobile (no complete item)
 async function displayTodoList2(jsonResponse) {
     let displayArea = mobile
     let displayhtml = ""
@@ -431,6 +457,7 @@ async function displayTodoList2(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
+//show any item in desktop
 async function displayTodoList3(jsonResponse) {
     let displayArea = desktop
     let displayhtml = ""
@@ -497,6 +524,7 @@ async function displayTodoList3(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
+//show any item in mobile
 async function displayTodoList4(jsonResponse) {
     let displayArea = mobile
     let displayhtml = ""
@@ -563,8 +591,7 @@ async function displayTodoList4(jsonResponse) {
     displayArea.innerHTML = displayhtml;
 };
 
-
-// example for fetch: POST with JSON format
+// POST with JSON format
 const fetchAddItem = document.querySelector('#fetchAddItem')
 fetchAddItem.addEventListener('submit', async(event) => {
     event.preventDefault();
@@ -581,17 +608,24 @@ fetchAddItem.addEventListener('submit', async(event) => {
     formObject['endDate'] = form.fetchEndDate.value;
     formObject['endTime'] = form.fetchEndTime.value;
     formObject['content'] = form.fetchDescription.value;
-    const response = await fetch('http://localhost:8080/todolist', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formObject),
-    })
+    postAllItem(formObject)
     location.reload();
 })
 
-// example for fetch: Put with JSON format
+async function postAllItem(item) {
+    try {
+        let response = await fetch('http://localhost:8080/todolist', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(item),
+        })
+    } catch (err) {
+    }
+}
+
+//Put with JSON format
 const updateItem = document.querySelector('#updateItem')
 updateItem.addEventListener('submit', async(event) => {
     event.preventDefault();
@@ -625,7 +659,7 @@ async function updateAllItem(item) {
     }
 }
 
-// example for fetch: Delete with JSON format
+// Delete with JSON format
 const removeItem = document.querySelector('#removeItem')
 removeItem.addEventListener('submit', async(event) => {
     event.preventDefault();
@@ -643,8 +677,203 @@ async function removeAllItem(id) {
     }
 }
 
+//Log in
+const updateLoginItem = document.querySelector('#updateLoginItem')
+updateLoginItem.addEventListener('submit', async(event) => {
+    let loginCount = false;
+    for (let i of loginJsonResponse) {
+        if((i.EmailAddress == loginEmail1.value) && (i.Password == loginPassword1.value)){
+            event.preventDefault();
+            const formObject = {};
+            formObject['userName'] = (i.LastName +" "+ i.FirstName);
+            formObject['login'] = 'yes';
+            let response = await fetch(`http://localhost:8080/whologin/001`, {
+                method: "PUT",
+                body: JSON.stringify(formObject),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            loginCount = true;
+            location.reload();
+            break;
+        }
+    }
+    if(!loginCount){
+        window.alert("login not successful");
+        event.preventDefault();
+    }
+});
+
+async function disUserName1(whoLoginJsonResponse) {
+    let displayArea = document.querySelector('#UserName1');;
+    let displayhtml = ""
+    for (let i of whoLoginJsonResponse) {
+            displayhtml = displayhtml +
+            `<ul class="nav flex-column text-white w-100">
+                <a href="#" class="nav-link h3 text-white my-2">To do list</a>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-user-check"></i>
+                    <span class="mx-2">${i.userName}</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-add-to-queue"></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal">Add Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class='bx bxs-edit'></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal2">Edit Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class='bx bx-unlink'></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-log-in"></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#LoginModal">log in</span>
+                </li>
+            </ul>`
+    }
+    displayArea.innerHTML = displayhtml;
+};
+
+async function disUserName2(whoLoginJsonResponse) {
+    let displayArea = document.querySelector('#UserName1');;
+    let displayhtml = ""
+    for (let i of whoLoginJsonResponse) {
+            displayhtml = displayhtml +
+            `<ul class="nav flex-column text-white w-100">
+                <a href="#" class="nav-link h3 text-white my-2">To do list</a>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-user-check"></i>
+                    <span class="mx-2">${i.userName}</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-add-to-queue"></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal">Add Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class='bx bxs-edit'></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal2">Edit Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class='bx bx-unlink'></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</span>
+                </li>
+                <li href="#" class="nav-link">
+                    <i class="bx bx-log-in"></i>
+                    <span class="mx-2" data-bs-toggle="modal" data-bs-target="#logoutModal">log out</span>
+                </li>
+            </ul>`
+    }
+    displayArea.innerHTML = displayhtml;
+};
+
+async function disUserName3(whoLoginJsonResponse) {
+    let displayArea = document.querySelector('#UserName2');;
+    let displayhtml = ""
+    for (let i of whoLoginJsonResponse) {
+            displayhtml = displayhtml +
+        `<div class="dropdown">
+        <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:100%;">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"><i class="far fa-address-card"></i> ${i.userName}</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LoginModal">log in</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal">Add Item</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal2">Edit Item</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</a></li>
+        </ul>
+        </div>`
+    }
+    displayArea.innerHTML = displayhtml;
+};
+
+async function disUserName4(whoLoginJsonResponse) {
+    let displayArea = document.querySelector('#UserName2');;
+    let displayhtml = ""
+    for (let i of whoLoginJsonResponse) {
+            displayhtml = displayhtml +
+        `<div class="dropdown">
+        <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:100%;">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"><i class="far fa-address-card"></i> ${i.userName}</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LogoutModal">log out</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal">Add Item</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal2">Edit Item</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AddItemModal3">Delete Item</a></li>
+        </ul>
+        </div>`
+    }
+    displayArea.innerHTML = displayhtml;
+};
+
+//Log out
+const logoutItem = document.querySelector('#logoutItem')
+logoutItem.addEventListener('submit', async(event)=> {
+        event.preventDefault();
+        const formObject = {};
+        formObject['userName'] = "Guest";
+        formObject['login'] = "no";
+        let response = await fetch(`http://localhost:8080/whologin/001`, {
+            method: "PUT",
+            body: JSON.stringify(formObject),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        location.reload();
+});
+
+//Register
+const register = document.querySelector('#register')
+register.addEventListener('submit', async(event) => {
+    event.preventDefault();
+    let registerCount = true;
+    const form = event.target;
+    const formObject = {};
+    formObject['id'] = form.SignUp.dataset.id;
+    formObject['FirstName'] = form.FirstName.value;
+    formObject['LastName'] = form.LastName.value;
+    formObject['EmailAddress'] = form.EmailAddress.value;
+    formObject['Password'] = form.Password.value;
+    for (let i of loginJsonResponse) {
+        if(i.EmailAddress == form.EmailAddress.value){
+            window.alert("Email address are used")
+            registerCount = false;
+            break;
+        }
+    }
+    if(registerCount){
+        let response = await fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formObject),
+        })
+        location.reload();
+    }
+})
+
+async function loginId1(loginJsonResponse) {
+    let displayArea = document.querySelector('#loginId');
+    let displayhtml = ""
+    for (let i = 0 ; i < loginJsonResponse.length; i++) {
+        if(i == (loginJsonResponse.length -1)){
+            newId = `00${(parseInt(loginJsonResponse[i].id, 10) + 1)}`
+            displayhtml = displayhtml +
+            `<button type="submit" class="btn btn-primary btn-block mb-4" id="SignUp" data-id="${newId}">Sign up</button>`
+        }
+    }
+    displayArea.innerHTML = displayhtml;
+};
+
 //run function for load dataBase and show data
-loadTodoList();
+loadData();
 
 
 
